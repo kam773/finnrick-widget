@@ -12,7 +12,7 @@ interface WidgetData {
 
 export function useWidget() {
   const [data, setData] = useState<WidgetData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,7 +34,6 @@ export function useWidget() {
         };
 
         setData(mockData);
-
       } catch (error) {
         setError(error instanceof Error ? error.message : "Failed to fetch widget data");
       } finally {
