@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 interface WidgetData {
   rating: {
@@ -18,6 +18,7 @@ export function useWidget() {
   useEffect(() => {
     const fetchWidgetData = async () => {
       try {
+        setLoading(true);
         // Simulate API delay
         await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -33,9 +34,10 @@ export function useWidget() {
         };
 
         setData(mockData);
-        setLoading(false);
-      } catch {
-        setError("Failed to fetch widget data");
+
+      } catch (error) {
+        setError(error instanceof Error ? error.message : "Failed to fetch widget data");
+      } finally {
         setLoading(false);
       }
     };
